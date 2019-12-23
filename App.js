@@ -1,12 +1,40 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, TextInput, Button, View } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+class App extends Component {
+
+  state = {
+    title: '',
+    author: '',
+    books: []
+  };
+
+  onChangeText = (key, val) => {
+    this.setState({ [key]: val });
+  };
+  render() {
+    return (
+      <View style={styles.container}>
+        <TextInput
+          style={styles.input}
+          value={this.state.title}
+          onChangeText={val => this.onChangeText('title', val)}
+          placeholder="What do you want to read?"
+        />
+        <TextInput
+          style={styles.input}
+          value={this.state.author}
+          onChangeText={val => this.onChangeText('author', val)}
+          placeholder="Who wrote it?"
+        />
+        <Button
+          onPress={() => alert('Success!')}
+          title="Add to TBR"
+          color="#eeaa55"
+        />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -17,3 +45,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default App;
